@@ -11,8 +11,6 @@ const Footer = () => {
             stroke-linejoin="round"
             stroke-width="2.5"
             class="w-10 h-10 text-white p-2 bg-blue-500 rounded-xl"
-            stroke-width="2.5"
-            class="w-10 h-10 text-white p-2 bg-blue-500 rounded-xl"
             viewBox="0 0 24 24"
           >
             <path d="M 4 16 L 4 2 L 12 12 L 20 2 L 20 22 M 16 18 L 24 18"></path>
