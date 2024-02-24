@@ -3,17 +3,17 @@ const Footer = () => {
     <footer class="text-gray-600 body-font">
       <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
         <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-          <svg
+        <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             stroke="currentColor"
             stroke-linecap="round"
             stroke-linejoin="round"
-            stroke-width="2"
-            class="w-10 h-10 text-white p-2 bg-blue-500 rounded-full"
+            stroke-width="2.5"
+            class="w-10 h-10 text-white p-2 bg-blue-500 rounded-xl"
             viewBox="0 0 24 24"
           >
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            <path d="M 2 16 L 2 2 L 10 12 L 18 2 L 18 22 M 14 18 L 22 18"></path>
           </svg>
           <span class="ml-3 text-xl">Tailblocks</span>
         </a>
