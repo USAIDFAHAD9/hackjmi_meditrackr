@@ -5,11 +5,10 @@ export default function App() {
     <div className="flex flex-col justify-between h-screen">
       <Navbar />
       <div className="text-center">
-        <div>helo</div>
-        <div>helo</div>
-        <div>helo</div>
-        <div>helo</div>
-        <div>helo</div>
+        <div>I wanna the very best</div>
+        <div>Like no one ever was</div>
+        <div>To catch them is my real test</div>
+        <div>To train them is my cause</div>
       </div>
       <Footer />
     </div>
