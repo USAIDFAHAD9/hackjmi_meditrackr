@@ -11,6 +11,7 @@ import {
 import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import SignIn from './pages/SignIn'
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/About" element={<About />} />
           <Route path="/Contact" element={<Contact />} />
+          <Route path="/SignIn" element={<SignIn />} />
         </Routes>
       </div>
       <Footer />
