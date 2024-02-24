@@ -16,7 +16,7 @@ export default function App() {
   return (
     <div className="flex flex-col h-screen justify-between ">
      
-        <Navbar />
+      <Navbar />
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -24,8 +24,7 @@ export default function App() {
           <Route path="/Contact" element={<Contact />} />
         </Routes>
       </div>
-      
-        <Footer />
+      <Footer />
     </div>
   )
 }
