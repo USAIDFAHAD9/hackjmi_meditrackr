@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 
 const SignIn = () => {
   return (
@@ -8,7 +8,7 @@ const SignIn = () => {
           <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Sign In</h1>
         </div>
         <div class="lg:w-1/2 md:w-2/3 mx-auto">
-          <div class="flex flex-col flex-wrap -m-2 items-center">
+          <div class="flex flex-col flex-wrap m-2 items-center">
             <div class="p-2 w-1/2">
               <div class="relative">
                 <label for="name" class="leading-7 text-sm text-gray-600">
@@ -36,9 +36,17 @@ const SignIn = () => {
               </div>
             </div>
             <div class="p-2 w-full border-gray-200">
-              <button class="flex mx-auto text-white bg-blue-500 border-0 py-2 px-8 mt-4 focus:outline-none hover:bg-blue-600 rounded text-lg">Button</button>
+              <button class="flex mx-auto text-white bg-blue-500 border-0 py-2 px-8 mt-4 focus:outline-none hover:bg-blue-600 rounded text-lg">Sign In</button>
             </div>
             
+          </div>
+          <div class="flex flex-col items-center m-2 items-center">
+            <p>
+                Register a new account&nbsp;
+            <a class="text-blue-500" href="https://www.google.com">
+                Here.
+            </a>
+            </p>
           </div>
         </div>
       </div>

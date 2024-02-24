@@ -1,8 +1,8 @@
 const Footer = () => {
   return (
-    <footer class="text-gray-600 body-font">
+    <footer class="text-gray-600 body-font shadow-2xl">
       <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-        <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+        <a href="" class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -10,7 +10,7 @@ const Footer = () => {
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2.5"
-            class="w-10 h-10 text-white p-2 bg-blue-500 rounded-xl"
+            class="w-10 h-10 text-white p-2 bg-blue-500 rounded-xl hover:bg-blue-600"
             viewBox="0 0 24 24"
           >
             <path d="M 4 16 L 4 2 L 12 12 L 20 2 L 20 22 M 16 18 L 24 18"></path>
