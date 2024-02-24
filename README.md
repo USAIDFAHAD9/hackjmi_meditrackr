@@ -1,4 +1,4 @@
-# Hack JMI - 2024
+# HackJMI - 2024
 # Elite Four - MediTrackr
 
 ## Getting Started with Create React App
