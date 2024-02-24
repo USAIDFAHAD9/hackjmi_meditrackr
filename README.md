@@ -1,4 +1,7 @@
-# Getting Started with Create React App
+# Hack JMI - 2024
+# Elite Four - MediTrackr
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
