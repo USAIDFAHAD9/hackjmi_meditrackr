@@ -40,7 +40,7 @@ const SignIn = () => {
             </div>
             
           </div>
-          <div class="flex flex-col items-center m-2 items-center">
+          <div class="flex flex-col items-center m-2 ">
             <p>
                 Register a new account&nbsp;
             <a class="text-blue-500" href="https://www.google.com">
