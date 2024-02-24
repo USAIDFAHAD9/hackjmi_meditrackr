@@ -9,11 +9,11 @@ const Footer = () => {
             stroke="currentColor"
             stroke-linecap="round"
             stroke-linejoin="round"
-            stroke-width="2"
-            class="w-10 h-10 text-white p-2 bg-blue-500 rounded-full"
+            stroke-width="2.5"
+            class="w-10 h-10 text-white p-2 bg-blue-500 rounded-xl"
             viewBox="0 0 24 24"
           >
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            <path d="M 4 16 L 4 2 L 12 12 L 20 2 L 20 22 M 16 18 L 24 18"></path>
           </svg>
           <span class="ml-3 text-xl">Tailblocks</span>
         </a>
