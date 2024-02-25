@@ -244,12 +244,13 @@ const RecordsPDF = () => {
     <div className="flex justify-center">
       <button
         onClick={kft}
-        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+        // className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+        className="bg-transparent hover:bg-green-500 text-green-600 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded "
       >
         Download PDF
       </button>
     </div>
-  );
+  )
 };
 
 export default RecordsPDF;
