@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { auth, db } from "../../firebase/firebase";
-import { getDoc, setDoc } from "@firebase/firestore";
+import { getDoc, doc, setDoc } from "@firebase/firestore";
 import jsPDF from "jspdf";
 
 const Urinalysis = () => {
-  const doc = new jsPDF();
+  const pdf = new jsPDF();
   const [date, setDate] = useState("");
   const [color, setColor] = useState("");
   const [formConsistency, setFormConsistency] = useState("");
@@ -21,7 +21,7 @@ const Urinalysis = () => {
 
   const urineAnalysisPDF = () => {
     let name = auth.currentUser.displayName;
-    doc.autoTable({
+    pdf.autoTable({
       theme: "grid",
       body: [
         [
@@ -59,7 +59,7 @@ const Urinalysis = () => {
         fontSize: 7,
       },
     });
-    doc.save(`${name}_urinalysis.pdf`);
+    pdf.save(`${name}_urinalysis.pdf`);
   };
 
   const handleSubmit = async (e) => {

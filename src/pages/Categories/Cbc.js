@@ -1,7 +1,8 @@
-import React from "react";
 import { useState } from "react";
 import { db } from "../../firebase/firebase";
 import { doc, setDoc } from "firebase/firestore";
+import jsPDF from "jspdf";
+import { auth } from "../../firebase/firebase";
 
 const Cbc = () => {
   const [date, setDate] = useState("");
@@ -15,6 +16,48 @@ const Cbc = () => {
   const [redCellDistributionWidth, setRedCellDistributionWidth] = useState("");
   const [totalLeukocyteCount, setTotalLeukocyteCount] = useState("");
   const [plateletCount, setPlateletCount] = useState("");
+  const pdf = jsPDF();
+
+  const generatePDF = () => {
+    let name = auth.currentUser.displayName;
+
+    pdf.autoTable({
+      theme: "grid",
+      body: [
+        [
+          date,
+          time,
+          hemoglobin,
+          packedCellVolume,
+          rbc,
+          mcv,
+          mch,
+          mchc,
+          redCellDistributionWidth,
+          totalLeukocyteCount,
+          plateletCount,
+        ],
+      ],
+      columns: [
+        { header: "Date" },
+        { header: "Time" },
+        { header: "Hemoglobin" },
+        { header: "Packed Cell Volume" },
+        { header: "RBC" },
+        { header: "MCV" },
+        { header: "MCH" },
+        { header: "MCHC" },
+        { header: "Red Cell Distribution Width" },
+        { header: "Total Leukocyte Count" },
+        { header: "Platelet Count" },
+      ],
+      styles: {
+        fontSize: 7,
+      },
+    });
+
+    pdf.save(`${name}_urinalysis.pdf`);
+  };
 
   const addRecordToFirestore = async () => {
     try {
@@ -67,7 +110,13 @@ const Cbc = () => {
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Date</span>
-          <input type="date" required className=" py-2 rounded-lg w-3/4 sm:w-1/3" onChange={(e) => setDate(e.target.value)} value={date}></input>
+          <input
+            type="date"
+            required
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3"
+            onChange={(e) => setDate(e.target.value)}
+            value={date}
+          ></input>
         </div>
 
         {/* <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
@@ -82,54 +131,119 @@ const Cbc = () => {
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Hemoglobin</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setHemoglobin(e.target.value)} value={hemoglobin}></input>
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setHemoglobin(e.target.value)}
+            value={hemoglobin}
+          ></input>
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Packed Cell Volume</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setPackedCellVolume(e.target.value)} value={packedCellVolume}></input>
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setPackedCellVolume(e.target.value)}
+            value={packedCellVolume}
+          ></input>
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">RBC</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setRBC(e.target.value)} value={rbc}></input>
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setRBC(e.target.value)}
+            value={rbc}
+          ></input>
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">MCV</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setMCV(e.target.value)} value={mcv}></input>
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setMCV(e.target.value)}
+            value={mcv}
+          ></input>
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">MCH</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setMCH(e.target.value)} value={mch}></input>
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setMCH(e.target.value)}
+            value={mch}
+          ></input>
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">MCHC</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setMCHC(e.target.value)} value={mchc}></input>
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setMCHC(e.target.value)}
+            value={mchc}
+          ></input>
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
-          <span className="text-white font-bold">Red Cell Distribution Width</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setRedCellDistributionWidth(e.target.value)} value={redCellDistributionWidth}></input>
+          <span className="text-white font-bold">
+            Red Cell Distribution Width
+          </span>
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setRedCellDistributionWidth(e.target.value)}
+            value={redCellDistributionWidth}
+          ></input>
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Total Leukocyte Count</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setTotalLeukocyteCount(e.target.value)} value={totalLeukocyteCount}></input>
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setTotalLeukocyteCount(e.target.value)}
+            value={totalLeukocyteCount}
+          ></input>
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Platelet Count</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setPlateletCount(e.target.value)} value={plateletCount}></input>
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setPlateletCount(e.target.value)}
+            value={plateletCount}
+          ></input>
         </div>
 
-        <button className="py-5 bg-green-500 hover:bg-green-600 rounded-lg my-8 px-5 text-white font-extrabold" onClick={handleSubmit}>
+        <button
+          className="py-5 bg-green-500 hover:bg-green-600 rounded-lg my-8 px-5 text-white font-extrabold"
+          onClick={handleSubmit}
+        >
           Save Records
         </button>
       </form>
-
+      <button
+        onClick={generatePDF}
+        // className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+        className="bg-transparent hover:bg-green-500 text-green-600 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded "
+      >
+        Download PDF
+      </button>
       {/* Displaying the submitted data */}
       <div>
         <h2>Submitted Record:</h2>
