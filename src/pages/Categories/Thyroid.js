@@ -9,7 +9,9 @@ const Thyroid = () => {
   const [t4Total, setT4Total] = useState('')
   const [tsh, setTsh] = useState('')
 
-  const handleSubmit = async (date, t3Total, t4Total, tsh) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault() // Prevent default form submission behavior
+
     try {
       const thyroidRecord = {
         Date: date,
