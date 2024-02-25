@@ -1,4 +1,5 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -26,6 +27,14 @@ const Hero = () => {
               Button
             </button> */}
           </div>
+          <div>
+            <Link
+              to="/map"
+              className="inline-flex text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg"
+            >
+              Locate nearest pathology lab
+            </Link>
+          </div>
         </div>
         <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
           <img
@@ -36,7 +45,7 @@ const Hero = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;
