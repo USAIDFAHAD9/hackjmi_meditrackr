@@ -1,28 +1,28 @@
-import { useState } from "react";
-import { auth, db } from "../../firebase/firebase";
-import { getDoc, doc, setDoc } from "@firebase/firestore";
-import jsPDF from "jspdf";
+import { useState } from 'react'
+import { auth, db } from '../../firebase/firebase'
+import { getDoc, doc, setDoc } from '@firebase/firestore'
+import jsPDF from 'jspdf'
 
 const Urinalysis = () => {
-  const pdf = new jsPDF();
-  const [date, setDate] = useState("");
-  const [color, setColor] = useState("");
-  const [formConsistency, setFormConsistency] = useState("");
-  const [mucus, setMucus] = useState("");
-  const [visibleBlood, setVisibleBlood] = useState("");
-  const [reaction, setReaction] = useState("");
-  const [pusCells, setPusCells] = useState("");
-  const [rbc, setRbc] = useState("");
-  const [macrophages, setMacrophages] = useState("");
-  const [trophozoites, setTrophozoites] = useState("");
-  const [cysts, setCysts] = useState("");
-  const [helminthicOva, setHelminthicOva] = useState("");
-  const [larva, setLarva] = useState("");
+  const pdf = new jsPDF()
+  const [date, setDate] = useState('')
+  const [color, setColor] = useState('')
+  const [formConsistency, setFormConsistency] = useState('')
+  const [mucus, setMucus] = useState('')
+  const [visibleBlood, setVisibleBlood] = useState('')
+  const [reaction, setReaction] = useState('')
+  const [pusCells, setPusCells] = useState('')
+  const [rbc, setRbc] = useState('')
+  const [macrophages, setMacrophages] = useState('')
+  const [trophozoites, setTrophozoites] = useState('')
+  const [cysts, setCysts] = useState('')
+  const [helminthicOva, setHelminthicOva] = useState('')
+  const [larva, setLarva] = useState('')
 
   const urineAnalysisPDF = () => {
-    let name = auth.currentUser.displayName;
+    let name = auth.currentUser.displayName
     pdf.autoTable({
-      theme: "grid",
+      theme: 'grid',
       body: [
         [
           date,
@@ -41,73 +41,73 @@ const Urinalysis = () => {
         ],
       ],
       columns: [
-        { header: "Date" },
-        { header: "Color" },
-        { header: "Form Consistency" },
-        { header: "Mucus" },
-        { header: "Visible Blood" },
-        { header: "Reaction" },
-        { header: "Pus Cells" },
-        { header: "RBC" },
-        { header: "Macrophages" },
-        { header: "Trophozoites" },
-        { header: "Cysts" },
-        { header: "Helminthic Ova" },
-        { header: "Larva" },
+        { header: 'Date' },
+        { header: 'Color' },
+        { header: 'Form Consistency' },
+        { header: 'Mucus' },
+        { header: 'Visible Blood' },
+        { header: 'Reaction' },
+        { header: 'Pus Cells' },
+        { header: 'RBC' },
+        { header: 'Macrophages' },
+        { header: 'Trophozoites' },
+        { header: 'Cysts' },
+        { header: 'Helminthic Ova' },
+        { header: 'Larva' },
       ],
       styles: {
         fontSize: 7,
       },
-    });
-    pdf.save(`${name}_urinalysis.pdf`);
-  };
+    })
+    pdf.save(`${name}_urinalysis.pdf`)
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
       const urinalysisRecord = {
         Date: date,
         Color: color,
-        "Form / Consistency": formConsistency,
+        'Form / Consistency': formConsistency,
         Mucus: mucus,
-        "Visible Blood": visibleBlood,
+        'Visible Blood': visibleBlood,
         Reaction: reaction,
-        "Pus Cells (/hpf)": pusCells,
-        "RBC (/hpf)": rbc,
+        'Pus Cells (/hpf)': pusCells,
+        'RBC (/hpf)': rbc,
         Macrophages: macrophages,
         Trophozoites: trophozoites,
         Cysts: cysts,
-        "Helminthic Ova": helminthicOva,
+        'Helminthic Ova': helminthicOva,
         Larva: larva,
-      };
+      }
 
-      const docRef = doc(db, "arsh_ali", "records");
+      const docRef = doc(db, 'arsh_ali', 'records')
 
-      const docSnap = await getDoc(docRef);
+      const docSnap = await getDoc(docRef)
 
       if (docSnap.exists()) {
-        const existingData = docSnap.data();
+        const existingData = docSnap.data()
 
         const newData = {
           ...existingData,
-          name: "Arsh Ali",
-          email: "arsh@gmail.com",
-          height: "180cm",
+          name: 'Arsh Ali',
+          email: 'arsh@gmail.com',
+          height: '180cm',
           urinalysis: existingData.urinalysis
             ? [...existingData.urinalysis, urinalysisRecord]
             : [urinalysisRecord],
-        };
+        }
 
-        await setDoc(docRef, newData);
-        console.log("Document successfully updated!");
+        await setDoc(docRef, newData)
+        console.log('Document successfully updated!')
       } else {
-        console.log("Document does not exist!");
+        console.log('Document does not exist!')
       }
     } catch (error) {
-      console.error("Error updating document: ", error);
+      console.error('Error updating document: ', error)
     }
-  };
+  }
 
   return (
     <div className="flex flex-col items-center w-full md:w-2/3 mx-auto">
@@ -261,7 +261,7 @@ const Urinalysis = () => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Urinalysis;
+export default Urinalysis

@@ -1,4 +1,3 @@
-
 import { auth } from './firebase'
 
 export const getUserInfo = () => {
@@ -7,8 +6,8 @@ export const getUserInfo = () => {
   const userName = currentUser ? currentUser.displayName : ''
   const photoURL = currentUser.photoURL ? currentUser.photoURL : ''
 
-  console.log(email)
-  console.log(userName)
+  console.log(currentUser)
+  // console.log(userName)
 
   return {
     email: email,

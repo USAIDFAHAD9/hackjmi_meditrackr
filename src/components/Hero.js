@@ -32,12 +32,12 @@ const Hero = () => {
           <img
             class="object-cover object-center rounded"
             alt="hero"
-            src="https://delhi.apollohospitals.com/wp-content/uploads/2021/07/apolloprism-6076b56144ba8.webp"
+            src="https://blog.tbhcreative.com/wp-content/uploads/hospital-website-design-showcase.png"
           />
         </div>
       </div>
     </section>
-  );
+  )
 };
 
 export default Hero;
