@@ -10,8 +10,6 @@ import SignUp from "./pages/SignUp";
 import AddRecords from "./pages/AddRecords";
 import Cbc from "./pages/Categories/Cbc";
 import RecordsPDF from "./pages/RecordsPDF/RecordsPDF";
-
-import Cbc from "./pages/Categories/Cbc";
 import Sugar from "./pages/Categories/Sugar";
 import Kft from "./pages/Categories/Kft";
 import Lft from "./pages/Categories/Lft";
