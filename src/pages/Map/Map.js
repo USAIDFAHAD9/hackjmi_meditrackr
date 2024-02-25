@@ -36,7 +36,7 @@ const Map = () => {
           "X-RapidAPI-Host": "google-api31.p.rapidapi.com",
         },
         data: {
-          text: text,
+          text: "pathology lab",
           place: place ? place : "",
           street: "",
           city: "",
@@ -69,68 +69,68 @@ const Map = () => {
     iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
     iconSize: [38, 38],
   });
-
+  
   const center = [28.5600712, 77.279409];
   return (
-    <div className="w-2/3 mx-auto">
-      <form onSubmit={handleSubmit} className="flex items-center justify-around my-4 h-16">
-        <div className="mb-4 flex flex-col justify-between">
-          <label htmlFor="country" className="block">
-            Country Name:{" "}
+    <div className="flex flex-col justify-between w-2/3 mx-auto">
+      <form onSubmit={handleSubmit} className="flex flex-wrap items-center justify-around my-4 h-48 md:h-32 lg:h-20 overflow-y-scroll">
+        <div className=" flex flex-col justify-between">
+          <label htmlFor="country" className="block text-center">
+            Country:{" "}
           </label>
           <input
             value={country}
             type="text"
-            className="w-32 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
+            className="w-24 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
             onChange={(e) => setCountry(e.target.value)}
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="place" className="block">
-            Place Name:{" "}
-          </label>
-          <input
-            value={place}
-            type="text"
-            className="w-32 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
-            onChange={(e) => setPlace(e.target.value)}
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="text" className="block">
-            Text:{" "}
-          </label>
-          <input
-            value={text}
-            type="text"
-            className="w-32 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
-            onChange={(e) => setText(e.target.value)}
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="postalCode" className="block">
-            Postal Code:{" "}
-          </label>
-          <input
-            value={postalCode == null ? "" : postalCode}
-            type="text"
-            className="w-32 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
-            onChange={(e) => setPostalCode(e.target.value)}
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="state" className="block">
+        <div className="">
+          <label htmlFor="state" className="block text-center">
             State:{" "}
           </label>
           <input
             value={state}
             type="text"
-            className="w-32 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
+            className="w-24 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
             onChange={(e) => setState(e.target.value)}
           />
         </div>
+        <div className="">
+          <label htmlFor="place" className="block text-center">
+            Place Name:{" "}
+          </label>
+          <input
+            value={place}
+            type="text"
+            className="w-24 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
+            onChange={(e) => setPlace(e.target.value)}
+          />
+        </div>
+        <div className="">
+          <label htmlFor="postalCode" className="block text-center">
+            Postal Code:{" "}
+          </label>
+          <input
+            value={postalCode == null ? "" : postalCode}
+            type="text"
+            className="w-24 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
+            onChange={(e) => setPostalCode(e.target.value)}
+          />
+        </div>
+        {/* <div className="">
+          <label htmlFor="text" className="block text-center">
+            Text:{" "}
+          </label>
+          <input
+            value={text}
+            type="text"
+            className="w-24 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
+            onChange={(e) => setText(e.target.value)}
+          />
+        </div> */}
         <button
-          className="bg-blue-500 w-24 h-10 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+          className="bg-blue-500 w-24 h-10 hover:bg-blue-600 text-white font-bold py-2 px-4 mt-5 rounded"
           type="submit"
         >
           Submit
@@ -154,13 +154,13 @@ const Map = () => {
             radius={100}
             stroke={false}
           />
-          <LayerGroup>
+          {/* <LayerGroup>
             <Circle
               center={[51.51, -0.08]}
               pathOptions={{ color: "green", fillColor: "green" }}
               radius={100}
             />
-          </LayerGroup>
+          </LayerGroup> */}
         </LayerGroup>
         <MarkerClusterGroup>
           {markers.map((marker, index) => (
