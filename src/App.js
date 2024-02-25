@@ -9,6 +9,7 @@ import LogIn from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import AddRecords from "./pages/AddRecords";
 import Cbc from "./pages/Categories/Cbc";
+import Map from "./pages/Map/Map";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/addrecords" element={<AddRecords />} />
           <Route path="/cbc" element={<Cbc />} />
+          <Route path="/map" element={<Map />} />
         </Routes>
       </div>
       <Footer />

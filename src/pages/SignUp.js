@@ -4,6 +4,7 @@ import { doCreateUserWithEmailAndPassword } from "../firebase/auth";
 
 import { useAuth } from "../contexts/authContext";
 import { useNavigate, Link } from "react-router-dom";
+import { doSignInWithGoogle } from "../firebase/auth";
 
 const SignUp = () => {
   const userLoggedIn = useAuth();
@@ -17,14 +18,15 @@ const SignUp = () => {
     setIsSigningIn(true); // Set isSigningIn to true before signing in
     await doCreateUserWithEmailAndPassword(email, password);
     navigate("/");
+    alert("User registered successfully");
   };
-
-  //   const onGoogleSignIn = (e) =>{
-  //     e.preventDefault()
-  //     if(!isSigningIn){
-  //         setIsSigningIn(true)
-  //         doSignInWithGoogle()
-  //     }
+  const onGoogleSignIn = async (e) => {
+    e.preventDefault();
+    setIsSigningIn(true);
+    await doSignInWithGoogle();
+    navigate("/");
+    alert("User logged in successfully");
+  };
 
   return (
     <section class="text-gray-600 body-font relative">
@@ -81,6 +83,20 @@ const SignUp = () => {
                 &nbsp;Here.
               </Link>
             </p>
+          </div>
+          <div className="flex flex-col items-center m-2 ">
+            <button
+              onClick={onGoogleSignIn}
+              className="px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700  hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150"
+            >
+              <img
+                className="w-6 h-6"
+                src="https://www.svgrepo.com/show/475656/google-color.svg"
+                loading="lazy"
+                alt="google logo"
+              />
+              <span>Login with Google</span>
+            </button>
           </div>
         </div>
       </div>

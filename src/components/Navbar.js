@@ -45,9 +45,14 @@ const Navbar = () => {
           {/* <Link class="mr-5 hover:text-gray-900" to="/Home">
             Home
           </Link> */}
-          <Link class="mr-5 hover:text-gray-900" to="/AddRecords">
-            Add Record
-          </Link>
+          {user ? (
+            <Link class="mr-5 hover:text-gray-900" to="/AddRecords">
+              Add Record
+            </Link>
+          ) : (
+            ""
+          )}
+
           <Link class="mr-5 hover:text-gray-900" to="/About">
             About Us
           </Link>

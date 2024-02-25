@@ -29,6 +29,7 @@ const LogIn = () => {
     setIsSigningIn(true);
     await doSignInWithGoogle();
     navigate("/");
+    alert("User logged in successfully");
   };
 
   return (
