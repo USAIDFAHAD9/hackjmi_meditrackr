@@ -76,7 +76,7 @@ const Lft = () => {
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Date</span>
-          <input type="date" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setDate(e.target.value)} value={date} />
+          <input type="date" required className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setDate(e.target.value)} value={date} />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
