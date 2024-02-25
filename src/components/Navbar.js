@@ -26,13 +26,16 @@ const Navbar = () => {
           {/* <Link class="mr-5 hover:text-gray-900" to="/Home">
             Home
           </Link> */}
+          <Link class="mr-5 hover:text-gray-900" to="/AddRecords">
+            Add Record
+          </Link>
           <Link class="mr-5 hover:text-gray-900" to="/About">
             About Us
           </Link>
           <Link class="mr-5 hover:text-gray-900" to="/Contact">
             Contact Us
           </Link>
-          {/* <Link class="mr-5 hover:text-gray-900" to="/Home">Homeasasasasaa</Link> */}
+
           <Link
             class="inline-flex items-center bg-blue-500 text-white border-0 py-1 px-3 focus:outline-none hover:bg-blue-600 rounded text-base mt-4 md:mt-0"
             to="/signup"

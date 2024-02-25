@@ -3,7 +3,8 @@ import Hero from "../components/Hero"
 const Home = () => {
   return (
   <div class="flex flex-col">
-    <div>Home</div>
+    <div> <Hero/></div>
+
   </div>
   )
 }

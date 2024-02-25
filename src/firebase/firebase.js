@@ -9,7 +9,6 @@ const firebaseConfig = {
   messagingSenderId: '1068158259103',
   appId: '1:1068158259103:web:28b434639303ff6eb237aa',
   measurementId: 'G-C7H6LH1HV9',
-  // databseURL: 'https://meditrack-91c78-default-rtdb.firebaseio.com/',
 }
 
 // Initialize Firebase
