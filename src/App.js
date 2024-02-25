@@ -8,9 +8,18 @@ import Contact from "./pages/Contact";
 import LogIn from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import AddRecords from "./pages/AddRecords";
-import Cbc from "./pages/Categories/Cbc";
 import Map from "./pages/Map/Map";
 import RecordsPDF from "./pages/RecordsPDF/RecordsPDF";
+
+
+import Cbc from './pages/Categories/Cbc'
+import Sugar from './pages/Categories/Sugar'
+import Kft from "./pages/Categories/Kft"
+import Lft from "./pages/Categories/Lft"
+import Bp from "./pages/Categories/Bp"
+import Thyroid from "./pages/Categories/Thyroid"
+import Urinalysis from "./pages/Categories/Urinalysis";
+
 
 export default function App() {
   return (
@@ -24,12 +33,19 @@ export default function App() {
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/addrecords" element={<AddRecords />} />
-          <Route path="/cbc" element={<Cbc />} />
           <Route path="/map" element={<Map />} />
           <Route path="/records" element={<RecordsPDF />} />
+
+          <Route path="/bp" element={<Bp />} />
+          <Route path="/cbc" element={<Cbc />} />
+          <Route path="/kft" element={<Kft />} />
+          <Route path="/lft" element={<Lft />} />
+          <Route path="/sugar" element={<Sugar />} />
+          <Route path="/thyroid" element={<Thyroid />} />
+          <Route path="/urinalysis" element={<Urinalysis />} />
         </Routes>
       </div>
       <Footer />
     </div>
-  );
+  )
 }
