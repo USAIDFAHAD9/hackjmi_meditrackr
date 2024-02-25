@@ -18,12 +18,14 @@ const SignUp = () => {
     setIsSigningIn(true); // Set isSigningIn to true before signing in
     await doCreateUserWithEmailAndPassword(email, password);
     navigate("/");
+    alert("User registered successfully");
   };
   const onGoogleSignIn = async (e) => {
     e.preventDefault();
     setIsSigningIn(true);
     await doSignInWithGoogle();
     navigate("/");
+    alert("User logged in successfully");
   };
 
   return (
