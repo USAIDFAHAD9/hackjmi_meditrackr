@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { db } from '../../firebase/firebase'
 import { doc, setDoc } from 'firebase/firestore'
 
+
 const Cbc = () => {
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
@@ -65,7 +66,7 @@ const Cbc = () => {
       <h1 className="text-center text-5xl py-10">CBC</h1>
       <div className="border-t border-gray-400 my-4 mb-8 w-full"></div>
       <form onSubmit={handleSubmit}>
-        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-1/2 m:w-2/3 w-4/5 m-auto items-center text-lg">
+        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Date</span>
           <input
             type="date"
@@ -75,7 +76,7 @@ const Cbc = () => {
           ></input>
         </div>
 
-        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-1/2 m:w-2/3 w-4/5 m-auto items-center text-lg">
+        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Time</span>
           <input
             type="time"
@@ -85,7 +86,7 @@ const Cbc = () => {
           ></input>
         </div>
 
-        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-1/2 m:w-2/3 w-4/5 m-auto items-center text-lg">
+        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Hemoglobin</span>
           <input
             type="number"
@@ -96,7 +97,7 @@ const Cbc = () => {
           ></input>
         </div>
 
-        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-1/2 m:w-2/3 w-4/5 m-auto items-center text-lg">
+        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Packed Cell Volume</span>
           <input
             type="number"
@@ -107,7 +108,7 @@ const Cbc = () => {
           ></input>
         </div>
 
-        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-1/2 m:w-2/3 w-4/5 m-auto items-center text-lg">
+        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">RBC</span>
           <input
             type="number"
@@ -118,7 +119,7 @@ const Cbc = () => {
           ></input>
         </div>
 
-        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-1/2 m:w-2/3 w-4/5 m-auto items-center text-lg">
+        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">MCV</span>
           <input
             type="number"
@@ -129,7 +130,7 @@ const Cbc = () => {
           ></input>
         </div>
 
-        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-1/2 m:w-2/3 w-4/5 m-auto items-center text-lg">
+        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">MCH</span>
           <input
             type="number"
@@ -140,7 +141,7 @@ const Cbc = () => {
           ></input>
         </div>
 
-        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-1/2 m:w-2/3 w-4/5 m-auto items-center text-lg">
+        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">MCHC</span>
           <input
             type="number"
@@ -151,7 +152,7 @@ const Cbc = () => {
           ></input>
         </div>
 
-        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-1/2 m:w-2/3 w-4/5 m-auto items-center text-lg">
+        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">
             Red Cell Distribution Width
           </span>
@@ -164,7 +165,7 @@ const Cbc = () => {
           ></input>
         </div>
 
-        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-1/2 m:w-2/3 w-4/5 m-auto items-center text-lg">
+        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Total Leukocyte Count</span>
           <input
             type="number"
@@ -175,7 +176,7 @@ const Cbc = () => {
           ></input>
         </div>
 
-        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-1/2 m:w-2/3 w-4/5 m-auto items-center text-lg">
+        <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Platelet Count</span>
           <input
             type="number"
