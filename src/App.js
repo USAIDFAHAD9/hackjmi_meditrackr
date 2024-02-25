@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import LogIn from "./pages/Login";
-import SignUp from "./pages/Signup";
+import SignUp from "./pages/SignUp";
 import AddRecords from "./pages/AddRecords";
 import Cbc from "./pages/Categories/Cbc";
 
