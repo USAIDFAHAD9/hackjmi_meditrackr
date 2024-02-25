@@ -55,13 +55,13 @@ const Cbc = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
   return (
     <div className="flex flex-col items-center w-full md:w-2/3  mx-auto">
       <h1 className="text-center text-5xl py-10">CBC</h1>
       <div className="border-t border-gray-400 my-4 mb-8 w-full"></div>
-      <form onclick={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <FormFieldDate name="Date" />
-
         <FormFieldNumber name="Hemoglobin (g/dL)" />
         <FormFieldNumber name="Packed Cell Volume (%)" />
         <FormFieldNumber name="RBC Count (mill/mm³)" />
@@ -76,6 +76,14 @@ const Cbc = () => {
           Save Records
         </button>
       </form>
+
+      {/* Displaying the newRecord state */}
+      {newRecord && (
+        <div>
+          <h2>Submitted Record:</h2>
+          <pre>{JSON.stringify(newRecord, null, 2)}</pre>
+        </div>
+      )}
     </div>
   );
 };
