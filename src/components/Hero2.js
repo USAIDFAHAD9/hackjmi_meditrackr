@@ -14,7 +14,7 @@ function Hero2() {
               <br class="hidden lg:inline-block" />
               Healthcare Providers for Effortless Collaboration
             </h1>
-            <p class="mb-8 leading-relaxed">
+            <p class="mb-8 leading-relaxed text-justify">
               With "MediTrackr," our innovative platform simplifies the process, allowing patients to securely share their medical information with healthcare professionals seamlessly. By leveraging cutting-edge technology, MediTrackr
               facilitates efficient communication and collaboration between patients and providers, leading to improved healthcare outcomes. Experience the future of healthcare management with MediTrackr - where sharing medical history is
               as easy as a click.

@@ -11,7 +11,7 @@ const Hero = () => {
             <br class="hidden lg:inline-block" />
             Reports with Ease
           </h1>
-          <p class="mb-8 leading-relaxed">
+          <p class="mb-8 leading-relaxed text-justify">
             "Streamline your healthcare journey with Track Your Medical Reports
             with Ease. Our intuitive platform simplifies record-keeping,
             enabling effortless organization and access to your medical reports.

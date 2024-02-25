@@ -7,8 +7,8 @@ const Home = () => {
     <div class="flex flex-col">
       <div>
         <Hero />
-        <Hero2 />
         <Map />
+        <Hero2 />
       </div>
     </div>
   );
