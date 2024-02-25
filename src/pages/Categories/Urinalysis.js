@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { db } from "../../firebase/firebase";
-import { doc, getDoc, setDoc } from "@firebase/firestore";
+import { useState } from "react";
+import { auth, db } from "../../firebase/firebase";
+import { getDoc, doc, setDoc } from "@firebase/firestore";
+import jsPDF from "jspdf";
 
 const Urinalysis = () => {
+  const pdf = new jsPDF();
   const [date, setDate] = useState("");
   const [color, setColor] = useState("");
   const [formConsistency, setFormConsistency] = useState("");
@@ -16,6 +18,49 @@ const Urinalysis = () => {
   const [cysts, setCysts] = useState("");
   const [helminthicOva, setHelminthicOva] = useState("");
   const [larva, setLarva] = useState("");
+
+  const urineAnalysisPDF = () => {
+    let name = auth.currentUser.displayName;
+    pdf.autoTable({
+      theme: "grid",
+      body: [
+        [
+          date,
+          color,
+          formConsistency,
+          mucus,
+          visibleBlood,
+          reaction,
+          pusCells,
+          rbc,
+          macrophages,
+          trophozoites,
+          cysts,
+          helminthicOva,
+          larva,
+        ],
+      ],
+      columns: [
+        { header: "Date" },
+        { header: "Color" },
+        { header: "Form Consistency" },
+        { header: "Mucus" },
+        { header: "Visible Blood" },
+        { header: "Reaction" },
+        { header: "Pus Cells" },
+        { header: "RBC" },
+        { header: "Macrophages" },
+        { header: "Trophozoites" },
+        { header: "Cysts" },
+        { header: "Helminthic Ova" },
+        { header: "Larva" },
+      ],
+      styles: {
+        fontSize: 7,
+      },
+    });
+    pdf.save(`${name}_urinalysis.pdf`);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,7 +94,9 @@ const Urinalysis = () => {
           name: "Arsh Ali",
           email: "arsh@gmail.com",
           height: "180cm",
-          urinalysis: existingData.urinalysis ? [...existingData.urinalysis, urinalysisRecord] : [urinalysisRecord],
+          urinalysis: existingData.urinalysis
+            ? [...existingData.urinalysis, urinalysisRecord]
+            : [urinalysisRecord],
         };
 
         await setDoc(docRef, newData);
@@ -70,71 +117,147 @@ const Urinalysis = () => {
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Date</span>
-          <input type="date" required className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" value={date} onChange={(e) => setDate(e.target.value)} />
+          <input
+            type="date"
+            required
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Color</span>
-          <input type="text" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" value={color} onChange={(e) => setColor(e.target.value)} />
+          <input
+            type="text"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Form / Consistency</span>
-          <input type="text" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" value={formConsistency} onChange={(e) => setFormConsistency(e.target.value)} />
+          <input
+            type="text"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            value={formConsistency}
+            onChange={(e) => setFormConsistency(e.target.value)}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Mucus</span>
-          <input type="text" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" value={mucus} onChange={(e) => setMucus(e.target.value)} />
+          <input
+            type="text"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            value={mucus}
+            onChange={(e) => setMucus(e.target.value)}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Visible Blood</span>
-          <input type="text" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" value={visibleBlood} onChange={(e) => setVisibleBlood(e.target.value)} />
+          <input
+            type="text"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            value={visibleBlood}
+            onChange={(e) => setVisibleBlood(e.target.value)}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Reaction</span>
-          <input type="text" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" value={reaction} onChange={(e) => setReaction(e.target.value)} />
+          <input
+            type="text"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            value={reaction}
+            onChange={(e) => setReaction(e.target.value)}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Pus Cells (/hpf)</span>
-          <input type="number" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" value={pusCells} onChange={(e) => setPusCells(e.target.value)} />
+          <input
+            type="number"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            value={pusCells}
+            onChange={(e) => setPusCells(e.target.value)}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">RBC (/hpf)</span>
-          <input type="number" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" value={rbc} onChange={(e) => setRbc(e.target.value)} />
+          <input
+            type="number"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            value={rbc}
+            onChange={(e) => setRbc(e.target.value)}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Macrophages</span>
-          <input type="text" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" value={macrophages} onChange={(e) => setMacrophages(e.target.value)} />
+          <input
+            type="text"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            value={macrophages}
+            onChange={(e) => setMacrophages(e.target.value)}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Trophozoites</span>
-          <input type="text" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" value={trophozoites} onChange={(e) => setTrophozoites(e.target.value)} />
+          <input
+            type="text"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            value={trophozoites}
+            onChange={(e) => setTrophozoites(e.target.value)}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Cysts</span>
-          <input type="text" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" value={cysts} onChange={(e) => setCysts(e.target.value)} />
+          <input
+            type="text"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            value={cysts}
+            onChange={(e) => setCysts(e.target.value)}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Helminthic Ova</span>
-          <input type="text" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" value={helminthicOva} onChange={(e) => setHelminthicOva(e.target.value)} />
+          <input
+            type="text"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            value={helminthicOva}
+            onChange={(e) => setHelminthicOva(e.target.value)}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Larva</span>
-          <input type="text" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" value={larva} onChange={(e) => setLarva(e.target.value)} />
+          <input
+            type="text"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            value={larva}
+            onChange={(e) => setLarva(e.target.value)}
+          />
         </div>
 
-        <button className="py-5 bg-green-500 hover:bg-green-600 rounded-lg my-8 px-5 text-white font-extrabold" type="submit">
+        <button
+          className="py-5 bg-green-500 hover:bg-green-600 rounded-lg my-8 px-5 text-white font-extrabold"
+          type="submit"
+        >
           Save Records
+        </button>
+        <button
+          onClick={urineAnalysisPDF}
+          // className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+          className="bg-transparent hover:bg-green-500 text-green-600 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded "
+        >
+          Download PDF
         </button>
       </form>
     </div>

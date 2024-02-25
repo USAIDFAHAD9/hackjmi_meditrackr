@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/firebase"; // Import your Firestore database configuration
 import { getDoc } from "firebase/firestore";
+import jsPDF from "jspdf";
+import { auth } from "../../firebase/firebase";
 const Kft = () => {
   const [date, setDate] = useState("");
   const [creatinine, setCreatinine] = useState("");
@@ -17,6 +19,53 @@ const Kft = () => {
   const [sodium, setSodium] = useState("");
   const [potassium, setPotassium] = useState("");
   const [chloride, setChloride] = useState("");
+  const pdf = jsPDF();
+  const generatePDF = () => {
+    let name = auth.currentUser.displayName;
+
+    pdf.autoTable({
+      theme: "grid",
+      body: [
+        [
+          date,
+          creatinine,
+          gfrEstimated,
+          urea,
+          ureaNitrogenBlood,
+          uricAcid,
+          totalProtein,
+          albumin,
+          globulin,
+          calcium,
+          phosphorus,
+          sodium,
+          potassium,
+          chloride,
+        ],
+      ],
+      columns: [
+        { header: "Date" },
+        { header: "Creatinine" },
+        { header: "GFR Estimated" },
+        { header: "Urea" },
+        { header: "Urea Nitrogen Blood" },
+        { header: "Uric Acid" },
+        { header: "Total Protein" },
+        { header: "Albumin" },
+        { header: "Globulin" },
+        { header: "Calcium" },
+        { header: "Phosphorus" },
+        { header: "Sodium" },
+        { header: "Potassium" },
+        { header: "Chloride" },
+      ],
+      styles: {
+        fontSize: 7,
+      },
+    });
+
+    pdf.save(`${name}_urinalysis.pdf`);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,7 +101,9 @@ const Kft = () => {
             name: "Arsh Ali", //user's name from profile
             email: "arsh@gmail.com", // user email
             height: "180cm", // user height
-            kft: existingData.kft ? [...existingData.kft, kftRecord] : [kftRecord], // Concatenate kft records
+            kft: existingData.kft
+              ? [...existingData.kft, kftRecord]
+              : [kftRecord], // Concatenate kft records
           };
 
           // Update the document with the merged data
@@ -80,90 +131,200 @@ const Kft = () => {
         {/* Date */}
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Date</span>
-          <input type="date" required className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setDate(e.target.value)} value={date} name="Date" />
+          <input
+            type="date"
+            required
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setDate(e.target.value)}
+            value={date}
+            name="Date"
+          />
         </div>
 
         {/* Creatinine */}
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Creatinine (mg/dL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setCreatinine(e.target.value)} value={creatinine} name="Creatinine (mg/dL)" />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setCreatinine(e.target.value)}
+            value={creatinine}
+            name="Creatinine (mg/dL)"
+          />
         </div>
 
         {/* GFR Estimated */}
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">GFR Estimated (mL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setGfrEstimated(e.target.value)} value={gfrEstimated} name="GFR Estimated (mL)" />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setGfrEstimated(e.target.value)}
+            value={gfrEstimated}
+            name="GFR Estimated (mL)"
+          />
         </div>
 
         {/* Urea */}
         {/* Repeat this block for each input field */}
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Urea (mg/dL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setUrea(e.target.value)} value={urea} name="Urea (mg/dL)" />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setUrea(e.target.value)}
+            value={urea}
+            name="Urea (mg/dL)"
+          />
         </div>
 
         {/* Urea Nitrogen Blood */}
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
-          <span className="text-white font-bold">Urea Nitrogen Blood (mg/dL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setUreaNitrogenBlood(e.target.value)} value={ureaNitrogenBlood} name="Urea Nitrogen Blood (mg/dL)" />
+          <span className="text-white font-bold">
+            Urea Nitrogen Blood (mg/dL)
+          </span>
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setUreaNitrogenBlood(e.target.value)}
+            value={ureaNitrogenBlood}
+            name="Urea Nitrogen Blood (mg/dL)"
+          />
         </div>
 
         {/* Uric Acid */}
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Uric Acid (mg/dL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setUricAcid(e.target.value)} value={uricAcid} name="Uric Acid (mg/dL)" />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setUricAcid(e.target.value)}
+            value={uricAcid}
+            name="Uric Acid (mg/dL)"
+          />
         </div>
 
         {/* Total Protein */}
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Total Protein (g/dL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setTotalProtein(e.target.value)} value={totalProtein} name="Total Protein (g/dL)" />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setTotalProtein(e.target.value)}
+            value={totalProtein}
+            name="Total Protein (g/dL)"
+          />
         </div>
 
         {/* Albumin */}
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Albumin (g/dL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setAlbumin(e.target.value)} value={albumin} name="Albumin (g/dL)" />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setAlbumin(e.target.value)}
+            value={albumin}
+            name="Albumin (g/dL)"
+          />
         </div>
 
         {/* Globulin */}
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Globulin (g/dL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setGlobulin(e.target.value)} value={globulin} name="Globulin (g/dL)" />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setGlobulin(e.target.value)}
+            value={globulin}
+            name="Globulin (g/dL)"
+          />
         </div>
 
         {/* Calcium */}
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Calcium (mg/dL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setCalcium(e.target.value)} value={calcium} name="Calcium (mg/dL)" />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setCalcium(e.target.value)}
+            value={calcium}
+            name="Calcium (mg/dL)"
+          />
         </div>
 
         {/* Phosphorus */}
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Phosphorus (mg/dL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setPhosphorus(e.target.value)} value={phosphorus} name="Phosphorus (mg/dL)" />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setPhosphorus(e.target.value)}
+            value={phosphorus}
+            name="Phosphorus (mg/dL)"
+          />
         </div>
 
         {/* Sodium */}
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Sodium (mEq/dL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setSodium(e.target.value)} value={sodium} name="Sodium (mEq/dL)" />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setSodium(e.target.value)}
+            value={sodium}
+            name="Sodium (mEq/dL)"
+          />
         </div>
 
         {/* Potassium */}
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Potassium (mEq/dL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setPotassium(e.target.value)} value={potassium} name="Potassium (mEq/dL)" />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setPotassium(e.target.value)}
+            value={potassium}
+            name="Potassium (mEq/dL)"
+          />
         </div>
 
         {/* Chloride */}
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Chloride (mEq/dL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setChloride(e.target.value)} value={chloride} name="Chloride (mEq/dL)" />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setChloride(e.target.value)}
+            value={chloride}
+            name="Chloride (mEq/dL)"
+          />
         </div>
 
-        <button className="py-5 bg-green-500 hover:bg-green-600 rounded-lg my-8 px-5 text-white font-extrabold" type="submit">
+        <button
+          className="py-5 bg-green-500 hover:bg-green-600 rounded-lg my-8 px-5 text-white font-extrabold"
+          type="submit"
+        >
           Save Records
+        </button>
+        <button
+          onClick={generatePDF}
+          // className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+          className="bg-transparent hover:bg-green-500 text-green-600 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded "
+        >
+          Download PDF
         </button>
       </form>
     </div>

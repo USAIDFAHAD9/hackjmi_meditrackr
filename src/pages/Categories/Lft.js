@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/firebase"; // Assuming you have your Firebase configuration set up
 import { getDoc } from "firebase/firestore";
+import jsPDF from "jspdf";
+import { auth } from "../../firebase/firebase";
 
 const Lft = () => {
   const [date, setDate] = useState("");
@@ -16,6 +18,49 @@ const Lft = () => {
   const [totalProtein, setTotalProtein] = useState("");
   const [albumin, setAlbumin] = useState("");
   const [agRatio, setAgRatio] = useState("");
+  const pdf = jsPDF();
+  const generatePDF = () => {
+    let name = auth.currentUser.displayName;
+
+    pdf.autoTable({
+      theme: "grid",
+      body: [
+        [
+          date,
+          astSgot,
+          altSgpt,
+          astAltRatio,
+          ggtp,
+          alkalinePhosphate,
+          bilirubinTotal,
+          bilirubinDirect,
+          bilirubinIndirect,
+          totalProtein,
+          albumin,
+          agRatio,
+        ],
+      ],
+      columns: [
+        { header: "Date" },
+        { header: "AST (SGOT)" },
+        { header: "ALT (SGPT)" },
+        { header: "AST/ALT Ratio" },
+        { header: "GGTP" },
+        { header: "Alkaline Phosphate" },
+        { header: "Bilirubin Total" },
+        { header: "Bilirubin Direct" },
+        { header: "Bilirubin Indirect" },
+        { header: "Total Protein" },
+        { header: "Albumin" },
+        { header: "AG Ratio" },
+      ],
+      styles: {
+        fontSize: 7,
+      },
+    });
+
+    pdf.save(`${name}_liver_function_test.pdf`);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,7 +95,9 @@ const Lft = () => {
             name: "Arsh Ali", //user's name from profile
             email: "arsh@gmail.com", // user email
             height: "180cm", // user height
-            lft: existingData.lft ? [...existingData.lft, lftRecord] : [lftRecord], // Concatenate kft records
+            lft: existingData.lft
+              ? [...existingData.lft, lftRecord]
+              : [lftRecord], // Concatenate kft records
           };
 
           // Update the document with the merged data
@@ -76,39 +123,85 @@ const Lft = () => {
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Date</span>
-          <input type="date" required className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setDate(e.target.value)} value={date} />
+          <input
+            type="date"
+            required
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setDate(e.target.value)}
+            value={date}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">AST(SGOT) (U/L)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setAstSgot(e.target.value)} value={astSgot} />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setAstSgot(e.target.value)}
+            value={astSgot}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">ALT(SGPT) (U/L)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setAltSgpt(e.target.value)} value={altSgpt} />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setAltSgpt(e.target.value)}
+            value={altSgpt}
+          />
         </div>
 
         {/* Add similar divs for other form fields */}
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">AST:ALT Ratio</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setAstAltRatio(e.target.value)} value={astAltRatio} />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setAstAltRatio(e.target.value)}
+            value={astAltRatio}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">GGTP (U/L)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setGgtp(e.target.value)} value={ggtp} />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setGgtp(e.target.value)}
+            value={ggtp}
+          />
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Alkaline Phosphate (U/L)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setAlkalinePhosphate(e.target.value)} value={alkalinePhosphate} />
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setAlkalinePhosphate(e.target.value)}
+            value={alkalinePhosphate}
+          />
         </div>
 
         {/* Continue adding similar divs for other form fields */}
 
-        <button className="py-5 bg-green-500 hover:bg-green-600 rounded-lg my-8 px-5 text-white font-extrabold" type="submit">
+        <button
+          className="py-5 bg-green-500 hover:bg-green-600 rounded-lg my-8 px-5 text-white font-extrabold"
+          type="submit"
+        >
           Save Records
+        </button>
+        <button
+          onClick={generatePDF}
+          // className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+          className="bg-transparent hover:bg-green-500 text-green-600 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded "
+        >
+          Download PDF
         </button>
       </form>
     </div>

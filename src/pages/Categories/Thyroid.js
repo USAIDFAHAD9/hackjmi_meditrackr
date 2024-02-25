@@ -2,12 +2,34 @@ import { getDoc, setDoc } from "@firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { doc } from "@firebase/firestore";
 import React, { useState } from "react";
+import jsPdf from "jspdf";
+import { auth } from "../../firebase/firebase";
 
 const Thyroid = () => {
   const [date, setDate] = useState("");
   const [t3Total, setT3Total] = useState("");
   const [t4Total, setT4Total] = useState("");
   const [tsh, setTsh] = useState("");
+  const pdf = new jsPdf();
+  const generatePDF = () => {
+    let name = auth.currentUser.displayName;
+
+    pdf.autoTable({
+      theme: "grid",
+      body: [[date, t3Total, t4Total, tsh]],
+      columns: [
+        { header: "Date" },
+        { header: "T3 Total" },
+        { header: "T4 Total" },
+        { header: "TSH" },
+      ],
+      styles: {
+        fontSize: 7,
+      },
+    });
+
+    pdf.save(`${name}_thyroid_test.pdf`);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
@@ -34,7 +56,9 @@ const Thyroid = () => {
           name: "Arsh Ali", // user's name from profile
           email: "arsh@gmail.com", // user email
           height: "180cm", // user height
-          thyroid: existingData.thyroid ? [...existingData.thyroid, thyroidRecord] : [thyroidRecord], // Concatenate thyroid records
+          thyroid: existingData.thyroid
+            ? [...existingData.thyroid, thyroidRecord]
+            : [thyroidRecord], // Concatenate thyroid records
         };
 
         // Update the document with the merged data
@@ -56,26 +80,60 @@ const Thyroid = () => {
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Date</span>
-          <input type="date" required className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setDate(e.target.value)} value={date}></input>
+          <input
+            type="date"
+            required
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setDate(e.target.value)}
+            value={date}
+          ></input>
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">T3, Total (ng/mL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setT3Total(e.target.value)} value={t3Total}></input>
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setT3Total(e.target.value)}
+            value={t3Total}
+          ></input>
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">T4, Total (μg/dL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setT4Total(e.target.value)} value={t4Total}></input>
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setT4Total(e.target.value)}
+            value={t4Total}
+          ></input>
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">TSH (μlU/mL)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setTsh(e.target.value)} value={tsh}></input>
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setTsh(e.target.value)}
+            value={tsh}
+          ></input>
         </div>
 
-        <button className="py-5 bg-green-500 hover:bg-green-600 rounded-lg my-8 px-5 text-white font-extrabold" type="submit">
+        <button
+          className="py-5 bg-green-500 hover:bg-green-600 rounded-lg my-8 px-5 text-white font-extrabold"
+          type="submit"
+        >
           Save Records
+        </button>
+        <button
+          onClick={generatePDF}
+          // className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+          className="bg-transparent hover:bg-green-500 text-green-600 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded "
+        >
+          Download PDF
         </button>
       </form>
     </div>

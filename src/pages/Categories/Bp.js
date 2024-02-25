@@ -1,11 +1,31 @@
 import React, { useState } from "react";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase"; // Assuming you have your Firebase configuration set up
+import jsPDF from "jspdf";
+import { auth } from "../../firebase/firebase";
 
 const Bp = () => {
   const [date, setDate] = useState("");
   const [systolicBP, setSystolicBP] = useState("");
   const [diastolicBP, setDiastolicBP] = useState("");
+  const pdf = jsPDF();
+
+  const generatePDF = () => {
+    let name = auth.currentUser.displayName;
+    pdf.autoTable({
+      theme: "grid",
+      body: [[date, systolicBP, diastolicBP]],
+      columns: [
+        { header: "Date" },
+        { header: "Systolic BP" },
+        { header: "Diastolic BP" },
+      ],
+      styles: {
+        fontSize: 7,
+      },
+    });
+    pdf.save(`${name}_urinalysis.pdf`);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,21 +77,53 @@ const Bp = () => {
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
           <span className="text-white font-bold">Date</span>
-          <input type="date" required className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setDate(e.target.value)} value={date}></input>
+          <input
+            type="date"
+            required
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setDate(e.target.value)}
+            value={date}
+          ></input>
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
-          <span className="text-white font-bold">Systolic Blood Pressure (Upper BP) (mmHg)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setSystolicBP(e.target.value)} value={systolicBP}></input>
+          <span className="text-white font-bold">
+            Systolic Blood Pressure (Upper BP) (mmHg)
+          </span>
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setSystolicBP(e.target.value)}
+            value={systolicBP}
+          ></input>
         </div>
 
         <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl flex flex-col sm:flex-row justify-between lg:w-full m:w-2/3 w-4/5 m-auto items-center text-lg">
-          <span className="text-white font-bold">Diastolic Blood Pressure (Lower BP) (mmHg)</span>
-          <input type="number" step="0.01" className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center" onChange={(e) => setDiastolicBP(e.target.value)} value={diastolicBP}></input>
+          <span className="text-white font-bold">
+            Diastolic Blood Pressure (Lower BP) (mmHg)
+          </span>
+          <input
+            type="number"
+            step="0.01"
+            className=" py-2 rounded-lg w-3/4 sm:w-1/3 text-center"
+            onChange={(e) => setDiastolicBP(e.target.value)}
+            value={diastolicBP}
+          ></input>
         </div>
 
-        <button className="py-5 bg-green-500 hover:bg-green-600 rounded-lg my-8 px-5 text-white font-extrabold" type="submit">
+        <button
+          className="py-5 bg-green-500 hover:bg-green-600 rounded-lg my-8 px-5 text-white font-extrabold"
+          type="submit"
+        >
           Save Records
+        </button>
+        <button
+          onClick={generatePDF}
+          // className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+          className="bg-transparent hover:bg-green-500 text-green-600 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded "
+        >
+          Download PDF
         </button>
       </form>
     </div>
