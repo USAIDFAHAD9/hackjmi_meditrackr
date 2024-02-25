@@ -1,17 +1,23 @@
-import { UserInfo } from '../firebase/UserInfo'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { auth } from '../firebase/firebase'
 import { doSignOut } from '../firebase/auth'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { getUserInfo } from '../firebase/UserInfo'
 
 const Profile = () => {
   const navigate = useNavigate()
 
   const [user, setUser] = useState(null)
+  const [userInfo, setUserInfo] = useState(null) // Initialize userInfo as null
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user)
+      if (user) {
+        const userInfo = getUserInfo() // Fetch user info if user exists
+        setUserInfo(userInfo)
+      }
     })
 
     return () => unsubscribe()
@@ -21,7 +27,6 @@ const Profile = () => {
     await doSignOut()
     setUser(null)
     alert('User logged out successfully')
-    // Navigate to the home page after sign out
     navigate('/')
   }
 
@@ -31,13 +36,30 @@ const Profile = () => {
         <div className="flex justify-center mt-[-5rem]">
           <img
             className="w-32 h-32 border-4 border-white rounded-full"
-            src={UserInfo.photoURL}
+            src={userInfo?.photoURL || ''}
             alt="Profile Picture"
           />
         </div>
         <div className="text-center mt-4 mb-[5rem]">
-          <h1 className="text-2xl font-semibold">{UserInfo.displayName}</h1>
-          <p className="text-gray-600">{UserInfo.email}</p>
+          <h1 className="text-2xl font-semibold">{userInfo?.displayName}</h1>
+          <p className="text-gray-600">{userInfo?.email}</p>
+          {/* Additional user information */}
+          <div>
+            {userInfo && (
+              <>
+                <p className="text-gray-600">
+                  Phone Number: {userInfo.phoneNo}
+                </p>
+                <p className="text-gray-600">Age: {userInfo.age}</p>
+                <p className="text-gray-600">Weight: {userInfo.weight}</p>
+                <p className="text-gray-600">Height: {userInfo.height}</p>
+                <p className="text-gray-600">
+                  Blood Group: {userInfo.bloodGroup}
+                </p>
+                <p className="text-gray-600">BMI: {userInfo.BMI}</p>
+              </>
+            )}
+          </div>
         </div>
         <div>
           <Link
