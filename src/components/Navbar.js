@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../firebase/firebase";
 import { doSignOut } from "../firebase/auth";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
@@ -18,10 +16,8 @@ const Navbar = () => {
 
   const handleSignOut = async () => {
     await doSignOut();
-    // After signing out, setUser to null to update the state
     setUser(null);
-    // alert("User logged out successfully");
-    toast.success("User logged out successfully");
+    alert("User logged out successfully");
   };
 
   return (
@@ -79,7 +75,6 @@ const Navbar = () => {
             </Link>
           )}
         </nav>
-        <ToastContainer />
       </div>
     </header>
   );

@@ -6,7 +6,7 @@ import {
 } from "../firebase/auth";
 
 import { useAuth } from "../contexts/authContext";
-import { Navigate, Link, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const LogIn = () => {
   const userLoggedIn = useAuth();
