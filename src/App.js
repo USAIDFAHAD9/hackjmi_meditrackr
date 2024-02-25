@@ -10,6 +10,7 @@ import SignUp from "./pages/SignUp";
 import AddRecords from "./pages/AddRecords";
 import Cbc from "./pages/Categories/Cbc";
 import Map from "./pages/Map/Map";
+import RecordsPDF from "./pages/RecordsPDF/RecordsPDF";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/addrecords" element={<AddRecords />} />
           <Route path="/cbc" element={<Cbc />} />
           <Route path="/map" element={<Map />} />
+          <Route path="/records" element={<RecordsPDF />} />
         </Routes>
       </div>
       <Footer />

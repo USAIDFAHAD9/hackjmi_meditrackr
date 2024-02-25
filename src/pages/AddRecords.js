@@ -1,6 +1,7 @@
-import React from 'react'
-import Cbc from './Categories/Cbc'
-import { Link } from 'react-router-dom'
+import React from "react";
+import Cbc from "./Categories/Cbc";
+import { Link } from "react-router-dom";
+import RecordsPDF from "./RecordsPDF/RecordsPDF";
 
 const AddRecords = () => {
   return (
@@ -21,8 +22,9 @@ const AddRecords = () => {
       <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl w-1/6 mid:w-3/6 m-auto text-lg text-white font-bold text-center">
         Liver
       </div>
+      <RecordsPDF />
     </div>
-  )
-}
+  );
+};
 
-export default AddRecords
+export default AddRecords;
