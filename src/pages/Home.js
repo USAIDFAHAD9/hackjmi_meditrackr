@@ -1,34 +1,65 @@
-import React from "react";
-import FormField from "../components/FormField";
+import React from 'react'
 
 const Home = () => {
   return (
-    <div class="flex flex-col">
-      <div>Home</div>
-      <div className="flex flex-col items-center">
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-        <FormField />
-      </div>
+  <div class="flex flex-col">
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
+    <div>Home</div>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
