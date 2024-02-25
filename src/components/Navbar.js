@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../firebase/firebase";
 import { doSignOut } from "../firebase/auth";
+import { UserInfo } from "../firebase/UserInfo";
+import EditProfile from "../pages/EditProfile";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
@@ -59,6 +60,13 @@ const Navbar = () => {
           <Link className="mr-5 hover:text-gray-900" to="/Contact">
             Contact Us
           </Link>
+          {user ? (
+            <Link className="mr-5 hover:text-gray-900" to="/editprofile">
+              Profile
+            </Link>
+          ) : (
+            ""
+          )}
           {user ? (
             <button
               className="inline-flex items-center bg-blue-500 text-white border-0 py-1 px-3 focus:outline-none hover:bg-blue-600 rounded text-base mt-4 md:mt-0"
