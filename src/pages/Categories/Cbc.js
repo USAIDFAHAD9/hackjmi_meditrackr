@@ -1,17 +1,60 @@
-import React from 'react'
-import { useState } from 'react'
-import { FormFieldNumber } from "../../components/FormFields"
+import React from "react";
+import { useState } from "react";
+import { FormFieldNumber } from "../../components/FormFields";
 // import { FormFieldText } from "../../components/FormFields"
-import { FormFieldDate } from './../../components/FormFields'
-
+import { FormFieldDate } from "./../../components/FormFields";
+import { db } from "../../firebase/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 const Cbc = () => {
-  const [newRecord, SetNewRecord] = useState(null)
+  const [newRecord, setNewRecord] = useState({
+    Date: "",
+    Hemoglobin: "",
+    PackedCellVolume: "",
+    RBC: "",
+    MCV: "",
+    MCH: "",
+    MCHC: "",
+    RedCellDistributionWidth: "",
+    TotalLeukocyteCount: "",
+    PlateletCount: "",
+  });
+  const addRecordToFirestore = async () => {
+    try {
+      const bloodTestRecord = {
+        Haemoglobin: newRecord.Hemoglobin,
+        PackedCellVolume: newRecord.PackedCellVolume,
+        RBC: newRecord.RBC,
+        MCV: newRecord.MCV,
+        MCH: newRecord.MCH,
+        MCHC: newRecord.MCHC,
+        RedCellDistributionWidth: newRecord.RedCellDistributionWidth,
+        TotalLeukocyteCount: newRecord.TotalLeukocyteCount,
+        PlateletCount: newRecord.PlateletCount,
+      };
+      const kftRecord = {
+        Urea: "20",
+        Creatinine: "1.5",
+        UricAcid: "7.5",
+      };
+      await setDoc(doc(db, "arsh_ali", "records"), {
+        name: "Arsh Ali",
+        email: "arsh@gmail.com",
+        height: "180cm",
+        bloodTest: [bloodTestRecord],
+        kft: [kftRecord],
+      });
+      console.log("Document successfully written!");
+    } catch (error) {
+      console.log("Error writing document: ", error);
+    }
+  };
+
+  addRecordToFirestore();
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    
-  }
+    e.preventDefault();
+  };
   return (
     <div className="flex flex-col items-center w-full md:w-2/3  mx-auto">
       <h1 className="text-center text-5xl py-10">CBC</h1>
@@ -34,7 +77,7 @@ const Cbc = () => {
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Cbc
+export default Cbc;

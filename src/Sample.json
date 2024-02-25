@@ -1,0 +1,64 @@
+[
+    {
+        "name": "Vidip Ghosh",
+        "email": "ghoshvidip26@gmail.com",
+        "height": "180cm",
+        "bloodTest": 
+        [
+            {    
+                "Hemoglobin": "12.5",
+                "WBC": "7000",
+                "RBC": "5.5",
+                "Platelets": "2.5",
+                "Date": "2021-05-01"
+            },
+            {
+                "Hemoglobin": "12.5",
+                "WBC": "7000",
+                "RBC": "5.5",
+                "Platelets": "2.5",
+                "Date": "2021-06-01"
+            }
+        ],
+        "kft": [
+            {
+                "Urea": "20",
+                "Creatinine": "1.5",
+                "UricAcid": "7.5",
+                "Date": "2021-05-01"
+            },
+            {
+                "Urea": "20",
+                "Creatinine": "1.5",
+                "UricAcid": "7.5",
+                "Date": "2021-06-01"
+            }
+        ]
+    },
+    {
+        "name": "Arsh Ali",
+        "email": "arsh@gmail.com",
+        "height": "180cm",
+        "bloodTest": [
+            {
+                "Hemoglobin": "12.5",
+                "WBC": "7000",
+                "RBC": "5.5",
+                "Platelets": "2.5",
+                "Date": "2021-05-01"
+            },
+            {
+                "Hemoglobin": "12.5",
+                "WBC": "7000",
+                "RBC": "5.5",
+                "Platelets": "2.5",
+                "Date": "2021-06-01"
+            }
+        ],
+        "kft": {
+            "Urea": "20",
+            "Creatinine": "1.5",
+            "UricAcid": "7.5"
+        }
+    }
+]
