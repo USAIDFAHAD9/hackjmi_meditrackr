@@ -72,16 +72,16 @@ const Map = () => {
 
   const center = [28.5600712, 77.279409];
   return (
-    <div className="z-20 relative">
-      <form onSubmit={handleSubmit} className="flex justify-between mt-4 z-20">
-        <div className="mb-4">
+    <div className="w-2/3 mx-auto">
+      <form onSubmit={handleSubmit} className="flex items-center justify-around my-4 h-16">
+        <div className="mb-4 flex flex-col justify-between">
           <label htmlFor="country" className="block">
             Country Name:{" "}
           </label>
           <input
             value={country}
             type="text"
-            className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
+            className="w-32 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
             onChange={(e) => setCountry(e.target.value)}
           />
         </div>
@@ -92,7 +92,7 @@ const Map = () => {
           <input
             value={place}
             type="text"
-            className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
+            className="w-32 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
             onChange={(e) => setPlace(e.target.value)}
           />
         </div>
@@ -103,7 +103,7 @@ const Map = () => {
           <input
             value={text}
             type="text"
-            className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
+            className="w-32 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
             onChange={(e) => setText(e.target.value)}
           />
         </div>
@@ -114,7 +114,7 @@ const Map = () => {
           <input
             value={postalCode == null ? "" : postalCode}
             type="text"
-            className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
+            className="w-32 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
             onChange={(e) => setPostalCode(e.target.value)}
           />
         </div>
@@ -125,18 +125,18 @@ const Map = () => {
           <input
             value={state}
             type="text"
-            className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
+            className="w-32 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
             onChange={(e) => setState(e.target.value)}
           />
         </div>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-blue-500 w-24 h-10 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
           type="submit"
         >
           Submit
         </button>
       </form>
-      <MapContainer center={[21, 78]} zoom={13}>
+      <MapContainer center={[28.5600712, 77.279409]} zoom={15} className="">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
