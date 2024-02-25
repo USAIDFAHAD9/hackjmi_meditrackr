@@ -4,61 +4,7 @@ const Home = () => {
   return (
   <div class="flex flex-col">
     <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    <div>Home</div>
-    </div>
+  </div>
   )
 }
 

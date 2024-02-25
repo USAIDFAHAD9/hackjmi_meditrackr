@@ -1,11 +1,42 @@
-import React from 'react';
+import React from 'react'
+import { useState } from 'react'
+import {
+    doCreateUserWithEmailAndPassword,
+} from '../firebase/auth'
 
-const SignIn = () => {
+import { useAuth } from '../contexts/authContext'
+import { Navigate , Link } from 'react-router-dom'
+
+const SignUp= () => {
+  const  userLoggedIn  = useAuth()
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [isSigningIn, setIsSigningIn] = useState(false)
+//   const [errorMessage, setErrorMessage] = useState('')
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    if(isSigningIn ){
+        setIsSigningIn(true);
+        await doCreateUserWithEmailAndPassword(email, password)
+    }  
+  }
+
+//   const onGoogleSignIn = (e) =>{
+//     e.preventDefault()
+//     if(!isSigningIn){
+//         setIsSigningIn(true)
+//         doSignInWithGoogle()
+//     }
+
   return (
     <section class="text-gray-600 body-font relative">
       <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-col text-center w-full">
-          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Sign Up</h1>
+          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+            Sign Up
+          </h1>
         </div>
         <div class="lg:w-1/2 md:w-2/3 mx-auto">
           <div class="flex flex-col flex-wrap m-2 items-center">
@@ -14,7 +45,8 @@ const SignIn = () => {
                 <label for="name" class="leading-7 text-sm text-gray-600">
                   Email
                 </label>
-                <input
+                <input 
+                onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   id="email"
                   name="email"
@@ -28,6 +60,7 @@ const SignIn = () => {
                   Password
                 </label>
                 <input
+                onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   id="password"
                   name="password"
@@ -36,22 +69,24 @@ const SignIn = () => {
               </div>
             </div>
             <div class="p-2 w-full border-gray-200">
-              <button class="flex mx-auto text-white bg-blue-500 border-0 py-2 px-8 mt-4 focus:outline-none hover:bg-blue-600 rounded text-lg">Sign Up</button>
+              <button onClick={onSubmit}
+                class="flex mx-auto text-white bg-blue-500 border-0 py-2 px-8 mt-4 focus:outline-none hover:bg-blue-600 rounded text-lg">
+                Sign Up
+              </button>
             </div>
-            
           </div>
-          <div class="flex flex-col items-center m-2 items-center">
+          <div class="flex flex-col items-center m-2">
             <p>
-                Already have an account ? Sign in
-            <a class="text-blue-500" href="https://www.google.com">
+              Already have an account ? Log in
+              <Link class="text-blue-500" to="/login">   //**************************************************** */
                 &nbsp;Here.
-            </a>
+              </Link>
             </p>
           </div>
         </div>
       </div>
     </section>
-  );
+  )
 }
 
-export default SignIn;
+export default SignUp

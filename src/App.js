@@ -5,25 +5,24 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Switch,
-  Link,
 } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
-import SignIn from './pages/SignIn'
+import LogIn from './pages/Login'
+import SignUp from './pages/Signup'
 
 export default function App() {
   return (
     <div className="flex flex-col h-screen justify-between ">
-     
       <Navbar />
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/About" element={<About />} />
           <Route path="/Contact" element={<Contact />} />
-          <Route path="/SignIn" element={<SignIn />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </div>
       <Footer />

@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
+
 const firebaseConfig = {
   apiKey: 'AIzaSyAbxPq18ca3NnEcqJrmU4SxwWfMqV4o2mE',
   authDomain: 'meditrack-91c78.firebaseapp.com',
@@ -8,6 +9,7 @@ const firebaseConfig = {
   messagingSenderId: '1068158259103',
   appId: '1:1068158259103:web:28b434639303ff6eb237aa',
   measurementId: 'G-C7H6LH1HV9',
+  // databseURL: 'https://meditrack-91c78-default-rtdb.firebaseio.com/',
 }
 
 // Initialize Firebase
