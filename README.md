@@ -1,5 +1,14 @@
 # HackJMI - 2024
-# Elite Four - MediTrackr
+
+## Elite Four:
+A team of 4 students - Usaid, Vidip, Arsh and Ebad pursuing their B Tech from Jamia Millia Islamia.
+Joined their hands together to make this web app named - MediTrackr
+
+## Introduction:
+Welcome to MediTrackr – a groundbreaking web app revolutionizing the way you manage your health records. We're committed to streamlining the recordkeeping process while maintaining the highest levels of security and compliance.
+
+## Our Mission & Vision:
+At MediTrackr, our mission is to equip healthcare organizations with innovative solutions that improve efficiency, reduce costs, and ultimately lead to better patient care. Through our intuitive platform, we envision a future where accurate and timely reporting becomes standard practice throughout the entire healthcare ecosystem.
 
 ## Getting Started with Create React App
 
