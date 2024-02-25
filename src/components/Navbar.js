@@ -1,25 +1,26 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { auth } from "../firebase/firebase";
-import { doSignOut } from "../firebase/auth";
-import { UserInfo } from "../firebase/UserInfo";
-import EditProfile from "../pages/EditProfile";
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { auth } from '../firebase/firebase'
+// import { doSignOut } from "../firebase/auth";
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
+  const navigate = useNavigate()
+
+  const [user, setUser] = useState(null)
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-    });
+      setUser(user)
+    })
 
-    return () => unsubscribe();
-  }, []);
+    return () => unsubscribe()
+  }, [])
 
-  const handleSignOut = async () => {
-    await doSignOut();
-    setUser(null);
-    alert("User logged out successfully");
-  };
+  // const handleSignOut = async () => {
+  //   await doSignOut()
+  //   setUser(null)
+  //   alert('User logged out successfully')
+  // }
 
   return (
     <header className="sticky top-0 left-0 text-gray-600 bg-white shadow body-font w-full">
@@ -43,15 +44,12 @@ const Navbar = () => {
           <span className="ml-3 text-xl">MediTrackr</span>
         </Link>
         <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          {/* <Link class="mr-5 hover:text-gray-900" to="/Home">
-            Home
-          </Link> */}
           {user ? (
             <Link class="mr-5 hover:text-gray-900" to="/AddRecords">
               Add Record
             </Link>
           ) : (
-            ""
+            ''
           )}
 
           <Link class="mr-5 hover:text-gray-900" to="/About">
@@ -61,20 +59,13 @@ const Navbar = () => {
             Contact Us
           </Link>
           {user ? (
-            <Link className="mr-5 hover:text-gray-900" to="/editprofile">
-              Profile
+            <Link className="mr-5 hover:text-gray-900" to="/profile">
+              Profile <img src={user.photoURL} alt="user Profile pic" />
             </Link>
           ) : (
-            ""
+            ''
           )}
-          {user ? (
-            <button
-              className="inline-flex items-center bg-blue-500 text-white border-0 py-1 px-3 focus:outline-none hover:bg-blue-600 rounded text-base mt-4 md:mt-0"
-              onClick={handleSignOut}
-            >
-              Sign Out
-            </button>
-          ) : (
+          {!user ? (
             <Link
               className="inline-flex items-center bg-blue-500 text-white border-0 py-1 px-3 focus:outline-none hover:bg-blue-600 rounded text-base mt-4 md:mt-0"
               to="/signup"
@@ -92,11 +83,13 @@ const Navbar = () => {
                 <path d="M5 12h14M12 5l7 7-7 7"></path>
               </svg>
             </Link>
+          ) : (
+            ''
           )}
         </nav>
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

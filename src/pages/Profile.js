@@ -1,8 +1,30 @@
-import { UserInfo } from "../firebase/UserInfo";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { UserInfo } from '../firebase/UserInfo'
+import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { auth } from '../firebase/firebase'
+import { doSignOut } from '../firebase/auth'
+import { useState, useEffect } from 'react'
+
 const Profile = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+
+  const [user, setUser] = useState(null)
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user)
+    })
+
+    return () => unsubscribe()
+  }, [])
+
+  const handleSignOut = async () => {
+    await doSignOut()
+    setUser(null)
+    alert('User logged out successfully')
+    // Navigate to the home page after sign out
+    navigate('/')
+  }
+
   return (
     <div className="flex justify-center mt-14 py-1">
       <div className="w-[30rem] md:w-[38rem] md:m-5 mt-10 p-4 border rounded-lg shadow-lg">
@@ -24,10 +46,17 @@ const Profile = () => {
           >
             Edit Profile
           </Link>
+
+          <button
+            className="inline-flex items-center bg-blue-500 text-white border-0 py-1 px-3 focus:outline-none hover:bg-blue-600 rounded text-base mt-4 md:mt-0"
+            onClick={handleSignOut}
+          >
+            Sign Out
+          </button>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile
