@@ -16,6 +16,8 @@ import Lft from "./pages/Categories/Lft";
 import Bp from "./pages/Categories/Bp";
 import Thyroid from "./pages/Categories/Thyroid";
 import Urinalysis from "./pages/Categories/Urinalysis";
+import EditProfile from "./pages/EditProfile";
+import Profile from "./pages/Profile";
 
 export default function App() {
   return (
@@ -39,6 +41,8 @@ export default function App() {
           <Route path="/sugar" element={<Sugar />} />
           <Route path="/thyroid" element={<Thyroid />} />
           <Route path="/urinalysis" element={<Urinalysis />} />
+          <Route path="/editprofile" element={<EditProfile />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
       <Footer />
