@@ -40,7 +40,7 @@ const Hero = () => {
           <img
             class="object-cover object-center rounded"
             alt="hero"
-            src="https://dummyimage.com/720x600"
+            src="https://delhi.apollohospitals.com/wp-content/uploads/2021/07/apolloprism-6076b56144ba8.webp"
           />
         </div>
       </div>
