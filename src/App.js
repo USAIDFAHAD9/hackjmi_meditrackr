@@ -6,7 +6,9 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import LogIn from "./pages/Login";
-import SignUp from "./pages/SignUp";
+import SignUp from "./pages/Signup";
+import AddRecords from "./pages/AddRecords";
+import Cbc from "./pages/Categories/Cbc";
 
 export default function App() {
   return (
@@ -19,6 +21,8 @@ export default function App() {
           <Route path="/Contact" element={<Contact />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/addrecords" element={<AddRecords />} />
+          <Route path="/cbc" element={<Cbc />} />
         </Routes>
       </div>
       <Footer />

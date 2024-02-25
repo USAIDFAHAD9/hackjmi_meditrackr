@@ -15,17 +15,17 @@ const Footer = () => {
           >
             <path d="M 4 16 L 4 2 L 12 12 L 20 2 L 20 22 M 16 18 L 24 18"></path>
           </svg>
-          <span class="ml-3 text-xl">Tailblocks</span>
+          <span class="ml-3 text-xl">MediTrackr</span>
         </a>
         <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
-          © 2020 Tailblocks —
+          © 2024 MediTrackr —
           <a
             href="https://twitter.com/knyttneve"
             class="text-gray-600 ml-1"
             rel="noopener noreferrer"
             target="_blank"
           >
-            @knyttneve
+            @MediTrackr
           </a>
         </p>
         <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">

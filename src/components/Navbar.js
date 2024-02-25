@@ -41,8 +41,14 @@ const Navbar = () => {
           </svg>
           <span className="ml-3 text-xl">MediTrackr</span>
         </Link>
-        <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          <Link className="mr-5 hover:text-gray-900" to="/About">
+        <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+          {/* <Link class="mr-5 hover:text-gray-900" to="/Home">
+            Home
+          </Link> */}
+          <Link class="mr-5 hover:text-gray-900" to="/AddRecords">
+            Add Record
+          </Link>
+          <Link class="mr-5 hover:text-gray-900" to="/About">
             About Us
           </Link>
           <Link className="mr-5 hover:text-gray-900" to="/Contact">
