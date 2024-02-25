@@ -1,40 +1,39 @@
-import React from 'react'
-import { useState } from 'react'
+import React from "react";
+import { useState } from "react";
 import {
-  
   doSignInWithEmailAndPassword,
-} from '../firebase/auth'
+  doSignInWithGoogle,
+} from "../firebase/auth";
 
-import { useAuth } from '../contexts/authContext'
-import { Navigate , Link } from 'react-router-dom'
+import { useAuth } from "../contexts/authContext";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const LogIn = () => {
-  const  userLoggedIn  = useAuth()
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [isSigningIn, setIsSigningIn] = useState(false)
-//   const [errorMessage, setErrorMessage] = useState('')
+  const userLoggedIn = useAuth();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  //   const [errorMessage, setErrorMessage] = useState('')
 
   const onSubmit = async (e) => {
-    e.preventDefault()
-    if(isSigningIn ){
-        setIsSigningIn(true);
-        await doSignInWithEmailAndPassword(email, password)
-    }  
-  }
+    e.preventDefault();
+    setIsSigningIn(true);
+    await doSignInWithEmailAndPassword(email, password);
+    navigate("/");
+    alert("User logged in successfully");
+  };
 
-//   const onGoogleSignIn = (e) =>{
-//     e.preventDefault()
-//     if(!isSigningIn){
-//         setIsSigningIn(true)
-//         // doSignInWithGoogle().catch
-//     }
-//   }
+  const onGoogleSignIn = async (e) => {
+    e.preventDefault();
+    setIsSigningIn(true);
+    await doSignInWithGoogle();
+    navigate("/");
+  };
 
   return (
     <div>
-      {userLoggedIn && <Navigate to={'/'} replace={true} />}
+      {userLoggedIn && <Navigate to={"/"} replace={true} />}
       <section class="text-gray-600 body-font relative">
         <div class="container px-5 py-24 mx-auto">
           <div class="flex flex-col text-center w-full">
@@ -81,19 +80,27 @@ const LogIn = () => {
                 </button>
               </div>
             </div>
-            <div class="flex flex-col items-center m-2 ">
-              <p>
-                Register a new account&nbsp;
-                <Link class="text-blue-500" to="/signup">
-                  Here.
-                </Link>
-              </p>
+            <p className="text-center">OR</p>
+            <div className="flex flex-col items-center m-2"></div>
+            <div className="flex flex-col items-center m-2 ">
+              <button
+                onClick={onGoogleSignIn}
+                className="px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700  hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150"
+              >
+                <img
+                  className="w-6 h-6"
+                  src="https://www.svgrepo.com/show/475656/google-color.svg"
+                  loading="lazy"
+                  alt="google logo"
+                />
+                <span>Login with Google</span>
+              </button>
             </div>
           </div>
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default LogIn
+export default LogIn;

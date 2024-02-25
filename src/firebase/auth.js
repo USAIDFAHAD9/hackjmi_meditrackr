@@ -1,38 +1,49 @@
 // import { app } from './firebase'
-import { auth } from './firebase'
+import { auth } from "./firebase";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
-} from '@firebase/auth'
+  signOut,
+} from "@firebase/auth";
 
-export const doCreateUserWithEmailAndPassword =  (email, password) => {
-   createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    console.log(user)
-    // ...
-  })
-  .catch((error) => {
-    console.log(error)
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  })
-}
+export const doCreateUserWithEmailAndPassword = (email, password) => {
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 export const doSignInWithGoogle = async () => {
-  const provider = new GoogleAuthProvider()
-  const result = await signInWithPopup(auth, provider)
-
-  // we can save user info in file store using: result.user
-  // console.log(result.user)
-  return result
-}
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 export const doSignInWithEmailAndPassword = async (email, password) => {
-  return signInWithEmailAndPassword(auth, email, password)
-}
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 export const doSignOut = () => {
-  return auth.signOut()
-}
+  signOut(auth)
+    .then(() => {
+      console.log("signed out");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};

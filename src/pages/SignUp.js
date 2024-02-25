@@ -1,34 +1,30 @@
-import React from 'react'
-import { useState } from 'react'
-import {
-    doCreateUserWithEmailAndPassword,
-} from '../firebase/auth'
+import React from "react";
+import { useState } from "react";
+import { doCreateUserWithEmailAndPassword } from "../firebase/auth";
 
-import { useAuth } from '../contexts/authContext'
-import { Navigate , Link } from 'react-router-dom'
+import { useAuth } from "../contexts/authContext";
+import { useNavigate, Link } from "react-router-dom";
 
-const SignUp= () => {
-  const  userLoggedIn  = useAuth()
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [isSigningIn, setIsSigningIn] = useState(false)
-//   const [errorMessage, setErrorMessage] = useState('')
+const SignUp = () => {
+  const userLoggedIn = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  const navigate = useNavigate();
 
   const onSubmit = async (e) => {
-    e.preventDefault()
-    if(isSigningIn ){
-        setIsSigningIn(true);
-        await doCreateUserWithEmailAndPassword(email, password)
-    }  
-  }
+    e.preventDefault();
+    setIsSigningIn(true); // Set isSigningIn to true before signing in
+    await doCreateUserWithEmailAndPassword(email, password);
+    navigate("/");
+  };
 
-//   const onGoogleSignIn = (e) =>{
-//     e.preventDefault()
-//     if(!isSigningIn){
-//         setIsSigningIn(true)
-//         doSignInWithGoogle()
-//     }
+  //   const onGoogleSignIn = (e) =>{
+  //     e.preventDefault()
+  //     if(!isSigningIn){
+  //         setIsSigningIn(true)
+  //         doSignInWithGoogle()
+  //     }
 
   return (
     <section class="text-gray-600 body-font relative">
@@ -45,8 +41,8 @@ const SignUp= () => {
                 <label for="name" class="leading-7 text-sm text-gray-600">
                   Email
                 </label>
-                <input 
-                onChange={(e) => setEmail(e.target.value)}
+                <input
+                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   id="email"
                   name="email"
@@ -60,7 +56,7 @@ const SignUp= () => {
                   Password
                 </label>
                 <input
-                onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   id="password"
                   name="password"
@@ -69,8 +65,10 @@ const SignUp= () => {
               </div>
             </div>
             <div class="p-2 w-full border-gray-200">
-              <button onClick={onSubmit}
-                class="flex mx-auto text-white bg-blue-500 border-0 py-2 px-8 mt-4 focus:outline-none hover:bg-blue-600 rounded text-lg">
+              <button
+                onClick={onSubmit}
+                class="flex mx-auto text-white bg-blue-500 border-0 py-2 px-8 mt-4 focus:outline-none hover:bg-blue-600 rounded text-lg"
+              >
                 Sign Up
               </button>
             </div>
@@ -78,7 +76,8 @@ const SignUp= () => {
           <div class="flex flex-col items-center m-2">
             <p>
               Already have an account ? Log in
-              <Link class="text-blue-500" to="/login">   //**************************************************** */
+              <Link class="text-blue-500" to="/login">
+                {" "}
                 &nbsp;Here.
               </Link>
             </p>
@@ -86,7 +85,7 @@ const SignUp= () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;
