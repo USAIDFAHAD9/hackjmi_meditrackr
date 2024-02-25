@@ -1,12 +1,5 @@
 import { useState } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  LayerGroup,
-  Circle,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, LayerGroup, Circle } from "react-leaflet";
 import L from "leaflet";
 import axios from "axios";
 import "leaflet/dist/leaflet.css";
@@ -31,8 +24,7 @@ const Map = () => {
         url: "https://google-api31.p.rapidapi.com/map",
         headers: {
           "content-type": "application/json",
-          "X-RapidAPI-Key":
-            "dc66c7ea2emsha6c7a2e618149d4p17da80jsn5c1e1cd8cb27",
+          "X-RapidAPI-Key": "dc66c7ea2emsha6c7a2e618149d4p17da80jsn5c1e1cd8cb27",
           "X-RapidAPI-Host": "google-api31.p.rapidapi.com",
         },
         data: {
@@ -69,54 +61,39 @@ const Map = () => {
     iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
     iconSize: [38, 38],
   });
-  
+
   const center = [28.5600712, 77.279409];
   return (
-    <div className="flex flex-col justify-between w-2/3 mx-auto">
+    <div className="flex flex-col justify-between w-2/3 mx-auto mt-16">
+      <div>
+        <h1 className="text-center sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
+          Locate nearby pathology labs
+        </h1>
+      </div>
       <form onSubmit={handleSubmit} className="flex flex-wrap items-center justify-around my-4 h-48 md:h-32 lg:h-20 overflow-y-scroll">
         <div className=" flex flex-col justify-between">
           <label htmlFor="country" className="block text-center">
             Country:{" "}
           </label>
-          <input
-            value={country}
-            type="text"
-            className="w-24 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
-            onChange={(e) => setCountry(e.target.value)}
-          />
+          <input value={country} type="text" className="w-24 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900" onChange={(e) => setCountry(e.target.value)} />
         </div>
         <div className="">
           <label htmlFor="state" className="block text-center">
             State:{" "}
           </label>
-          <input
-            value={state}
-            type="text"
-            className="w-24 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
-            onChange={(e) => setState(e.target.value)}
-          />
+          <input value={state} type="text" className="w-24 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900" onChange={(e) => setState(e.target.value)} />
         </div>
         <div className="">
           <label htmlFor="place" className="block text-center">
             Place Name:{" "}
           </label>
-          <input
-            value={place}
-            type="text"
-            className="w-24 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
-            onChange={(e) => setPlace(e.target.value)}
-          />
+          <input value={place} type="text" className="w-24 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900" onChange={(e) => setPlace(e.target.value)} />
         </div>
         <div className="">
           <label htmlFor="postalCode" className="block text-center">
             Postal Code:{" "}
           </label>
-          <input
-            value={postalCode == null ? "" : postalCode}
-            type="text"
-            className="w-24 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900"
-            onChange={(e) => setPostalCode(e.target.value)}
-          />
+          <input value={postalCode == null ? "" : postalCode} type="text" className="w-24 h-10 px-2 py-2 rounded-lg border border-gray-600 focus:border-gray-900" onChange={(e) => setPostalCode(e.target.value)} />
         </div>
         {/* <div className="">
           <label htmlFor="text" className="block text-center">
@@ -129,31 +106,16 @@ const Map = () => {
             onChange={(e) => setText(e.target.value)}
           />
         </div> */}
-        <button
-          className="bg-blue-500 w-24 h-10 hover:bg-blue-600 text-white font-bold py-2 px-4 mt-5 rounded"
-          type="submit"
-        >
+        <button className="bg-blue-500 w-24 h-10 hover:bg-blue-600 text-white font-bold py-2 px-4 mt-5 rounded" type="submit">
           Submit
         </button>
       </form>
       <MapContainer center={[28.5600712, 77.279409]} zoom={15} className="">
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <AreaSelect />
         <LayerGroup>
-          <Circle
-            center={center}
-            pathOptions={{ fillColor: "red" }}
-            radius={2500}
-          />
-          <Circle
-            center={center}
-            pathOptions={{ fillColor: "red" }}
-            radius={100}
-            stroke={false}
-          />
+          <Circle center={center} pathOptions={{ fillColor: "red" }} radius={2500} />
+          <Circle center={center} pathOptions={{ fillColor: "red" }} radius={100} stroke={false} />
           {/* <LayerGroup>
             <Circle
               center={[51.51, -0.08]}
