@@ -72,8 +72,8 @@ const Map = () => {
 
   const center = [28.5600712, 77.279409];
   return (
-    <>
-      <form onSubmit={handleSubmit} className="flex justify-between mt-4">
+    <div className="z-20 relative">
+      <form onSubmit={handleSubmit} className="flex justify-between mt-4 z-20">
         <div className="mb-4">
           <label htmlFor="country" className="block">
             Country Name:{" "}
@@ -136,7 +136,6 @@ const Map = () => {
           Submit
         </button>
       </form>
-
       <MapContainer center={[21, 78]} zoom={13}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -173,7 +172,7 @@ const Map = () => {
           ))}
         </MarkerClusterGroup>
       </MapContainer>
-    </>
+    </div>
   );
 };
 
