@@ -27,15 +27,15 @@ const Profile = () => {
     return () => unsubscribe()
   }, [])
   const handleSignOut = async () => {
-   doSignOut()
+    doSignOut()
     setUser(null)
     alert('User logged out successfully')
     navigate('/')
   }
 
   return (
-    <div className="flex justify-center mt-14 py-1">
-      <div className="w-[30rem] md:w-[38rem] md:m-5 mt-10 p-4 border rounded-lg shadow-lg">
+    <div className="flex justify-center mt-14 py-1 items-center">
+      <div className="w-[30rem] md:w-[38rem] md:m-5 mt-10 p-4 border rounded-lg shadow-lg items-center">
         <div className="flex justify-center mt-[-5rem]">
           <img
             className="w-32 h-32 border-4 border-white rounded-full"
@@ -58,13 +58,13 @@ const Profile = () => {
         <div>
           <Link
             to="/editprofile"
-            className="block w-2/3 m-auto py-2 text-center text-white bg-blue-500 hover:bg-blue-600 rounded-xl"
+            className="block w-1/2 m-auto py-2 text-center text-white bg-blue-500 hover:bg-blue-600 rounded-xl my-5"
           >
             Edit Profile
           </Link>
 
           <button
-            className="inline-flex items-center bg-blue-500 text-white border-0 py-1 px-3 focus:outline-none hover:bg-blue-600 rounded text-base mt-4 md:mt-0"
+            className="block w-1/2 m-auto py-2 text-center text-white bg-blue-500 hover:bg-blue-600 rounded-xl"
             onClick={handleSignOut}
           >
             Sign Out

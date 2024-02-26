@@ -60,7 +60,7 @@ const Navbar = () => {
               >
                 <span>Profile</span>
                 <img
-                  className="ml-1 rounded-full"
+                  className="ml-1 rounded-full w-12 h-12"
                   src={user?.photoURL || ''}
                   alt="user Profile pic"
                 />

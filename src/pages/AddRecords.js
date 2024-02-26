@@ -37,9 +37,7 @@ const AddRecords = () => {
       <div className="p-4 my-2 bg-blue-500 hover:bg-blue-600 rounded-xl w-1/6 mid:w-3/6 m-auto text-lg text-white font-bold text-center">
         <Link to="/urinalysis"> Urinalysis</Link>
       </div>
-      <div className="pt-10">
-        <RecordsPDF />
-      </div>
+      <div className="pt-10"></div>
     </div>
   )
 }
