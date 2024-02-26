@@ -16,12 +16,6 @@ const Navbar = () => {
     return () => unsubscribe()
   }, [])
 
-  // const handleSignOut = async () => {
-  //   await doSignOut()
-  //   setUser(null)
-  //   alert('User logged out successfully')
-  // }
-
   return (
     <header className="sticky top-0 left-0 text-gray-600 bg-white shadow body-font w-full">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -59,9 +53,19 @@ const Navbar = () => {
             Contact Us
           </Link>
           {user ? (
-            <Link className="mr-5 hover:text-gray-900" to="/profile">
-              Profile <img src={user.photoURL} alt="user Profile pic" />
-            </Link>
+            <div className="flex items-center justify-between">
+              <Link
+                className="mr-5 hover:text-gray-900 flex items-center"
+                to="/profile"
+              >
+                <span>Profile</span>
+                <img
+                  className="ml-1 rounded-full"
+                  src={user?.photoURL || ''}
+                  alt="user Profile pic"
+                />
+              </Link>
+            </div>
           ) : (
             ''
           )}

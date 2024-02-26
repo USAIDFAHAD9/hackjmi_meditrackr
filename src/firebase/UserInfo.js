@@ -6,7 +6,7 @@ export const getUserInfo = () => {
   const userName = currentUser ? currentUser.displayName : ''
   const photoURL = currentUser.photoURL ? currentUser.photoURL : ''
 
-  console.log(currentUser)
+  // console.log(currentUser)
   // console.log(userName)
 
   return {

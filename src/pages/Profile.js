@@ -9,22 +9,25 @@ const Profile = () => {
   const navigate = useNavigate()
 
   const [user, setUser] = useState(null)
-  const [userInfo, setUserInfo] = useState(null) // Initialize userInfo as null
+  // const [userInfo, setUserInfo] = useState(null) // Initialize userInfo as null
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       setUser(user)
       if (user) {
-        const userInfo = getUserInfo() // Fetch user info if user exists
-        setUserInfo(userInfo)
+        try {
+          const userInfo = await getUserInfo() // Fetch user info if user exists
+          setUser(userInfo) // Update state with user info
+        } catch (error) {
+          console.error('Error fetching user info:', error)
+        }
       }
     })
 
     return () => unsubscribe()
   }, [])
-
   const handleSignOut = async () => {
-    await doSignOut()
+   doSignOut()
     setUser(null)
     alert('User logged out successfully')
     navigate('/')
@@ -36,29 +39,20 @@ const Profile = () => {
         <div className="flex justify-center mt-[-5rem]">
           <img
             className="w-32 h-32 border-4 border-white rounded-full"
-            src={userInfo?.photoURL || ''}
+            src={user?.photoURL || ''}
             alt="Profile Picture"
           />
         </div>
         <div className="text-center mt-4 mb-[5rem]">
-          <h1 className="text-2xl font-semibold">{userInfo?.displayName}</h1>
-          <p className="text-gray-600">{userInfo?.email}</p>
-          {/* Additional user information */}
+          <h1 className="text-2xl font-semibold">{user?.displayName}</h1>
+          <p className="text-gray-600">{user?.email}</p>
           <div>
-            {userInfo && (
-              <>
-                <p className="text-gray-600">
-                  Phone Number: {userInfo.phoneNo}
-                </p>
-                <p className="text-gray-600">Age: {userInfo.age}</p>
-                <p className="text-gray-600">Weight: {userInfo.weight}</p>
-                <p className="text-gray-600">Height: {userInfo.height}</p>
-                <p className="text-gray-600">
-                  Blood Group: {userInfo.bloodGroup}
-                </p>
-                <p className="text-gray-600">BMI: {userInfo.BMI}</p>
-              </>
-            )}
+            <p className="text-gray-600">Phone Number: {user?.phoneNo}</p>
+            <p className="text-gray-600">Age: {user?.age}</p>
+            <p className="text-gray-600">Weight: {user?.weight}</p>
+            <p className="text-gray-600">Height: {user?.height}</p>
+            <p className="text-gray-600">Blood Group: {user?.bloodGroup}</p>
+            <p className="text-gray-600">BMI: {user?.BMI}</p>
           </div>
         </div>
         <div>
